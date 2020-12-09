@@ -1,0 +1,32 @@
+@startuml
+interface IBuilder{
+    IBuilder addName(String name);
+    IBuilder addAge(int age);
+    IBuilder addSex(byte sex);
+    People build();
+}
+class ConcreteBuilder{
+    private People people;
+    IBuilder addName(String name);
+    IBuilder addAge(int age);
+    IBuilder addSex(byte sex);
+    People build();
+}
+class People{
+    private String name;
+    private Integer age;
+    private byte sex;
+    //Get和Set方法
+}
+class Client{
+public static void main(String[] args) {
+        IBuilder builder = new ConcreteBuilder()
+                            .addName("橙汁")
+                            .addAge(21)
+                            .addSex((byte)1);
+        System.out.print(builder.build());
+}
+ConcreteBuilder ..|> IBuilder : implements
+ConcreteBuilder ..> People : create
+Client ..> ConcreteBuilder : create
+@enduml

@@ -1,0 +1,45 @@
+@startuml
+abstract class Component<<抽象组件>>{
+    + abstract void operation();
+}
+
+class ConcreteComponent<<具体组件>>{
+    __相应的处理逻辑__
+    + void operation(){}
+}
+ConcreteComponent --|> Component:继承
+
+abstract class Decorator<<抽象装饰器>>{
+    __持有组件对象__
+    # Component component;
+    __构造方法，传入组件对象__
+    + Decorator(Component component){}
+    __组件对象执行请求，可以在前后添加操作__
+    + void operation(){component.operation()}
+}
+Decorator --|> Component:继承
+Decorator --o Component:聚合
+
+class ConcreteComponentA{
+    __构造器内调用super(component)__
+    + ConcreteComponentA(Component component){}
+    __定义调用父类的operation方法前后需要执行的操作__
+    - void operationFirst(){}
+    - void operationLast(){}
+    __重写父类的方法，可以增加一些操作__
+    @Override
+    + void operation(){}
+}
+class ConcreteComponentB{
+    __构造器内调用super(component)__
+    + ConcreteComponentB(Component component){}
+    __定义调用父类的operation方法前后需要执行的操作__
+    - void operationFirst(){}
+    -void operationLast(){}
+    __重写父类的方法，可以增加一些操作__
+    @Override
+    + void operation(){}
+}
+ConcreteComponentA --|> Decorator:继承
+ConcreteComponentB --|> Decorator:继承
+@enduml
