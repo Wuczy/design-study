@@ -1,0 +1,26 @@
+@startuml
+class SubSystemA<<子系统A>>{
+    + void doA()
+}
+class SubSystemB<<子系统B>>{
+    + void doB()
+}
+class SubSystemC<<子系统C>>{
+    + void doC()
+}
+
+class Facade{
+    __创建三个子系统__
+    - SubSystemA a
+    - SubSystemB b
+    - SubSystemC c
+   __对外接口__
+   + void doA(){}
+   + void doB(){}
+   + void doC(){}
+}
+
+Facade --> SubSystemA:创建
+Facade --> SubSystemB:创建
+Facade --> SubSystemC:创建
+@enduml
