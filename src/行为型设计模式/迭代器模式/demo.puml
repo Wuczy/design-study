@@ -1,0 +1,28 @@
+@startuml
+interface Iterator<抽象迭代器>{
+    + E next();
+    + boolean hasNext();
+}
+class ConcreteIterator<具体迭代器>{
+    - List<E> list;
+    - int cursor = 0;
+    + ConcreteIterator(List<E> list);
+    + E next();
+    + boolean hasNext();
+}
+
+interface IAggregate<抽象容器>{
+    + void add(E element);
+    + boolean remove(E element);
+    + Iterator<E> iterator():
+}
+class ConcreteIAggregate<具体容器>{
+    - List<E> list = new ArrayList<E>();
+    + void add(E element);
+    + boolean remove(E element);
+    + ConcreteIterator<E> iterator():
+}
+ConcreteIterator ..|> Iterator:实现
+ConcreteIAggregate ..|> IAggregate:实现
+ConcreteIAggregate --> ConcreteIterator:创建
+@enduml
